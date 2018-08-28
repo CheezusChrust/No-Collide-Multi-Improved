@@ -215,8 +215,12 @@ function TOOL:RightClick( trace )
 		notifyPlayer( Owner, "No props were no-collided! It seems like all of your entities are too far apart. Try increasing the distance setting if needed.", "NOTIFY_GENERIC" )
 		self:deselectAll()
 	else
-		if Dumb == 1 and n > 200 then
-			notifyPlayer( Owner, "No-Collided selected entities using " .. math.floor(n/2) .. " constraints. " .. self.Smack[math.random( 1, table.Count( self.Smack ) )], "NOTIFY_GENERIC" )
+		if Dumb == 1 then
+			if n > 200 then
+				notifyPlayer( Owner, "No-Collided selected entities using " .. math.floor(n/2) .. " constraints. " .. self.Smack[math.random( 1, table.Count( self.Smack ) )], "NOTIFY_GENERIC" )
+			else
+				notifyPlayer( Owner, "No-Collided selected entities using " .. math.floor(n/2) .. " constraints.", "NOTIFY_GENERIC" )
+			end
 		else
 			notifyPlayer( Owner, "No-Collided selected entities using " .. n .. " constraints", "NOTIFY_GENERIC" )
 		end
@@ -224,6 +228,8 @@ function TOOL:RightClick( trace )
 	end
 
 	self.SelectedEntities = { }
+
+	return true
 end
 
 function TOOL:Reload( trace )

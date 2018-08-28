@@ -168,7 +168,7 @@ function TOOL:RightClick( trace )
 	local n = 0
 	for Entity, _ in pairs( self.SelectedEntities ) do
 		for Entity2, _ in pairs( self.SelectedEntities ) do
-			if (NoCollidedTo[Entity] == Entity2 or NoCollidedTo[Entity2] == Entity) then break end
+			if (NoCollidedTo[Entity] == Entity2 or NoCollidedTo[Entity2] == Entity) and Dumb == 0 then break end
 			if (Entity == Entity2) == false then
 				if self:isReallyValid( Entity ) and self:isReallyValid( Entity2 ) and (intersection3d( Entity, Entity2, Distance ) or Dumb == 1) and n < 2048 then
 					NoCollidedTo[Entity] = Entity2
@@ -188,7 +188,7 @@ function TOOL:RightClick( trace )
 			if self:isReallyValid( Entity) then self:deselectedIt( Entity ) end
 		end
 	else
-		if Dumb == 1 and n > 10 then
+		if Dumb == 1 and n > 200 then
 			notifyPlayer( Owner, "No-Collided selected entities using " .. n .. " constraints. " .. self.Smack[math.random( 1, table.Count( self.Smack ) )], "NOTIFY_GENERIC" )
 		else
 			notifyPlayer( Owner, "No-Collided selected entities using " .. n .. " constraints", "NOTIFY_GENERIC" )

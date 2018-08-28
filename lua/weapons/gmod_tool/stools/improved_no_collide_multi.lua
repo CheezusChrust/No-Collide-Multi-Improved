@@ -197,6 +197,7 @@ function TOOL:RightClick( trace )
 			end
 		end
 	end
+	self.SelectedEntities = {} --Lazy temporary fix I'll do a better one later
 end
 
 function TOOL:Reload( trace )
